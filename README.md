@@ -1,6 +1,8 @@
 # wasm-arrays
 [![Build Status](https://travis-ci.org/DanRuta/wasm-arrays.svg?branch=master)](https://travis-ci.org/DanRuta/wasm-arrays) [![Coverage Status](https://coveralls.io/repos/github/DanRuta/wasm-arrays/badge.svg?branch=master)](https://coveralls.io/github/DanRuta/wasm-arrays?branch=master)
 
+[![NPM](https://nodei.co/npm/wasm-arrays.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/wasm-arrays/)
+
 A couple of helper functions to make WebAssembly array parameters easy to use.
 
 ## Importing
