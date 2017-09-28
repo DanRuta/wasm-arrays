@@ -1,6 +1,6 @@
 "use strict"
 
-const ccallArrays = (func, returnType, params, {heapIn="HEAPF32", heapOut="HEAPF32", returnArraySize=1}={}) => {
+const ccallArrays = (func, returnType, paramTypes=[], params, {heapIn="HEAPF32", heapOut="HEAPF32", returnArraySize=1}={}) => {
 
     const heapMap = {}
     heapMap.HEAP8 = Int8Array // int8_t
@@ -12,21 +12,18 @@ const ccallArrays = (func, returnType, params, {heapIn="HEAPF32", heapOut="HEAPF
     heapMap.HEAPF32 = Float32Array // float
     heapMap.HEAPF64 = Float64Array // double
 
+    let res
+    let error
     const returnTypeParam = returnType=="array" ? "number" : returnType
     const parameters = []
     const parameterTypes = []
     const bufs = []
-    let res
-    let error
 
     try {
         if (params) {
             for (let p=0; p<params.length; p++) {
 
-                if (!Array.isArray(params[p])) {
-                    parameters.push(params[p])
-                    parameterTypes.push(typeof params[p])
-                } else {
+                if (paramTypes[p] == "array" || Array.isArray(params[p])) {
 
                     const typedArray = new heapMap[heapIn](params[p].length)
 
@@ -56,6 +53,10 @@ const ccallArrays = (func, returnType, params, {heapIn="HEAPF32", heapOut="HEAPF
                     parameters.push(params[p].length)
                     parameterTypes.push("number")
                     parameterTypes.push("number")
+
+                } else {
+                    parameters.push(params[p])
+                    parameterTypes.push(paramTypes[p]==undefined ? "number" : paramTypes[p])
                 }
             }
         }
@@ -84,8 +85,8 @@ const ccallArrays = (func, returnType, params, {heapIn="HEAPF32", heapOut="HEAPF
     }
 }
 
-const cwrapArrays = (func, returnType, {heapIn="HEAPF32", heapOut="HEAPF32", returnArraySize=1}={}) => {
-    return params => ccallArrays(func, returnType, params, {heapIn, heapOut, returnArraySize})
+const cwrapArrays = (func, returnType, paramTypes, {heapIn="HEAPF32", heapOut="HEAPF32", returnArraySize=1}={}) => {
+    return params => ccallArrays(func, returnType, paramTypes, params, {heapIn, heapOut, returnArraySize})
 }
 
 typeof window=="undefined" && ((exports.ccallArrays = ccallArrays) & (exports.cwrapArrays = cwrapArrays))

@@ -1,5 +1,6 @@
 # wasm-arrays
 [![Build Status](https://travis-ci.org/DanRuta/wasm-arrays.svg?branch=master)](https://travis-ci.org/DanRuta/wasm-arrays) [![Coverage Status](https://coveralls.io/repos/github/DanRuta/wasm-arrays/badge.svg?branch=master)](https://coveralls.io/github/DanRuta/wasm-arrays?branch=master)
+
 A couple of helper functions to make WebAssembly array parameters easy to use.
 
 ## Importing
@@ -19,7 +20,7 @@ You can see the ```test.js``` file to see more nodejs examples.
 
 **There are a few examples included in the demo.html, test.js and emscripten.cpp files, for their respective use cases**
 
-The included functions aim to mimick the WebAssembly ccall and cwrap functions. They therefore work the same way. Currently, the parameter types array is not included, but it will be in the near future.
+The included functions aim to mimick the WebAssembly ccall and cwrap functions. They therefore work the same way.
 
 If you need to pass an array parameter, you need to just add the parameter to the list of parameters.
 
@@ -30,7 +31,7 @@ In the C++ code, this will be turned into two parameters:
 #### Example:
 JavaScript
 ```javascript
-const result = ccallArrays("addNums", "number", [[1,2,3,4,5,6,7]])
+const result = ccallArrays("addNums", "number", ["array"], [[1,2,3,4,5,6,7]])
 ```
 C++
 ```c++
@@ -52,7 +53,7 @@ To return an array from WebAssembly, you need to specify the return parameter as
 #### Example:
 JavaScript
 ```javascript
-const res = ccallArrays("doubleValues", "array", [[1,2,3,4,5]], {heapIn: "HEAP8", heapOut: "HEAP8", returnArraySize: 5})
+const res = ccallArrays("doubleValues", "array", ["array"], [[1,2,3,4,5]], {heapIn: "HEAP8", heapOut: "HEAP8", returnArraySize: 5})
 console.log(res) // [2,4,6,8,10]
 ```
 C++

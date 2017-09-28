@@ -9,11 +9,11 @@
 
     window.addEventListener("wasmLoaded", () => {
 
-        console.log(ccallArrays("getSetWASMArray", "array", [[1,2,3,4,5], 12345, [2, 10]], {heapIn: "HEAPF32", returnArraySize: 5}))
+        console.log(ccallArrays("getSetWASMArray", "array", ["array", "number", "array"], [[1,2,3,4,5], 12345, [2, 10]], {heapIn: "HEAPF32", returnArraySize: 5}))
 
-        console.log(ccallArrays("get10Nums", "array", null, {heapOut: "HEAP32", returnArraySize: 10}))
+        console.log(ccallArrays("get10Nums", "array", null, null, {heapOut: "HEAP32", returnArraySize: 10}))
 
-        console.log(ccallArrays("addNums", "number", [[1,2,3,4,5]]))
+        console.log(ccallArrays("addNums", "number", ["array"], [[1,2,3,4,5]]))
 
     })
 
