@@ -1,11 +1,13 @@
 # wasm-arrays
+[![Build Status](https://travis-ci.org/DanRuta/wasm-arrays.svg?branch=master)](https://travis-ci.org/DanRuta/wasm-arrays) [![Coverage Status](https://coveralls.io/repos/github/DanRuta/wasm-arrays/badge.svg?branch=master)](https://coveralls.io/github/DanRuta/wasm-arrays?branch=master)
 A couple of helper functions to make WebAssembly array parameters easy to use.
 
 ## Importing
 ### Browser
 Add ```<script src="/dist/wasm-arrays.min.js"></script>``` and use ```ccallArrays``` or ```cwrapArrays```
 See the demo.html file included to see a few examples.
- NOTE: You will need to serve the html file through a server. There is one already included, so you can run ```node server```, then navigate to ```localhost:1337``` to view.
+
+NOTE: You will need to serve the html file through a server. There is one already included, so you can run ```node server```, then navigate to ```localhost:1337``` to view.
 
 ### Nodejs
 ```javascript
@@ -71,6 +73,7 @@ int8_t* doubleValues (int8_t *buf, int bufSize) {
 
 ### Heaps
 You can also specify the heaps used for the arrays going in and out. The following table matches the heaps to the C++ types, for quick reference:
+
 | Heap | C++ |
 |:--:|:--:|
 | HEAP8 | int8_t |
