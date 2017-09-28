@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo - wasm-arrays</title>
+    <script src="demo.js"></script>
+    <script src="/dist/wasm-arrays.min.js"></script>
+    <script>
+    "use strict"
+
+    window.addEventListener("wasmLoaded", () => {
+
+        console.log(ccallArrays("getSetWASMArray", "array", [[1,2,3,4,5], 12345, [2, 10]], {heapIn: "HEAPF32", returnArraySize: 5}))
+
+        console.log(ccallArrays("get10Nums", "array", null, {heapOut: "HEAP32", returnArraySize: 10}))
+
+        console.log(ccallArrays("addNums", "number", [[1,2,3,4,5]]))
+
+    })
+
+    </script>
+</head>
+<body>
+Open the console (Make sure you are serving this page via a server. Run 'node server.js' to use the one included.)
+</body>
+</html>
