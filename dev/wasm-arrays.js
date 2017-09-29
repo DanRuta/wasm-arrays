@@ -1,6 +1,6 @@
 "use strict"
 
-const ccallArrays = (func, returnType, paramTypes=[], params, {heapIn="HEAPF32", heapOut="HEAPF32", returnArraySize=1}={}) => {
+const ccallArrays = (func, returnType, paramTypes, params, {heapIn="HEAPF32", heapOut="HEAPF32", returnArraySize=1}={}) => {
 
     const heapMap = {}
     heapMap.HEAP8 = Int8Array // int8_t
@@ -14,6 +14,7 @@ const ccallArrays = (func, returnType, paramTypes=[], params, {heapIn="HEAPF32",
 
     let res
     let error
+    paramTypes = paramTypes || []
     const returnTypeParam = returnType=="array" ? "number" : returnType
     const parameters = []
     const parameterTypes = []

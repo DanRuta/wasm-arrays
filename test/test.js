@@ -23,6 +23,11 @@ describe("ccallArrays", () => {
         expect(res).to.deep.equal([20,40,60,80,100])
     })
 
+    it("Demo Example 1 - no parameter types", () => {
+        const res = ccallArrays("getSetWASMArray", "array", null, [[1,2,3,4,5], 12345, [2, 10]], {heapIn: "HEAPF32", returnArraySize: 5})
+        expect(res).to.deep.equal([20,40,60,80,100])
+    })
+
     it("Demo example 2", () => {
         const res = ccallArrays("get10Nums", "array", null, null, {heapOut: "HEAP32", returnArraySize: 10})
         expect(res).to.deep.equal([1,2,3,4,5,6,7,8,9,10])
@@ -89,6 +94,12 @@ describe("ccallArrays", () => {
         expect(Module._free).to.be.called
         Module._free.restore()
     })
+
+    it("Throws errors, but first it frees the memory using Module._free", () => {
+        sinon.stub(Module, "ccall").callsFake(() => {throw new Error("Fake error")})
+        expect(ccallArrays.bind(null, "addNums", "array", ["array"], [[1,2,3]], {heapIn: "HEAP32", heapOut: "HEAP3fdgd2"})).to.throw("Fake error")
+        Module.ccall.restore()
+    })
 })
 
 
@@ -96,6 +107,12 @@ describe("cwrapArrays", () => {
 
     it("Demo Example 1", () => {
         const fn = cwrapArrays("getSetWASMArray", "array", ["array", "number", "array"], {heapIn: "HEAPF32", returnArraySize: 5})
+        const res = fn([[1,2,3,4,5], 12345, [2, 10]])
+        expect(res).to.deep.equal([20,40,60,80,100])
+    })
+
+    it("Demo Example 1 - no parameter types", () => {
+        const fn = cwrapArrays("getSetWASMArray", "array", null, {heapIn: "HEAPF32", returnArraySize: 5})
         const res = fn([[1,2,3,4,5], 12345, [2, 10]])
         expect(res).to.deep.equal([20,40,60,80,100])
     })
@@ -178,5 +195,12 @@ describe("cwrapArrays", () => {
         expect(fn.bind(null, [[1,2,3]])).to.throw()
         expect(Module._free).to.be.called
         Module._free.restore()
+    })
+
+    it("Throws errors, but first it frees the memory using Module._free", () => {
+        sinon.stub(Module, "ccall").callsFake(() => {throw new Error("Fake error")})
+        const fn = ccallArrays.bind(null, "addNums", "array", ["array"], {heapIn: "HEAP32", heapOut: "HEAP3fdgd2"})
+        expect(fn.bind([[1,2,3]])).to.throw("Fake error")
+        Module.ccall.restore()
     })
 })

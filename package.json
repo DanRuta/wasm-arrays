@@ -1,6 +1,6 @@
 {
   "name": "wasm-arrays",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A couple of helper functions to make WebAssembly array parameters easy to use",
   "main": "dist/wasm-arrays.min.js",
   "scripts": {
