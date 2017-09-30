@@ -5,6 +5,11 @@
 
 A couple of helper functions to make WebAssembly array parameters easy to use.
 
+## Read more
+Medium article going through the reasoning and implementation:
+
+https://becominghuman.ai/passing-and-returning-webassembly-array-parameters-a0f572c65d97
+
 ## Importing
 ### Browser
 Add ```<script src="/dist/wasm-arrays.min.js"></script>``` and use ```ccallArrays``` or ```cwrapArrays```
