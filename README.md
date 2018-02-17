@@ -27,6 +27,8 @@ You can see the ```test.js``` file to see more nodejs examples.
 
 **There are a few examples included in the demo.html, test.js and emscripten.cpp files, for their respective use cases**
 
+You can also see some more in-depth, real usage examples in my jsNet framework (https://github.com/DanRuta/jsNet), where this has been expanded to also pass maps and volumes.
+
 The included functions aim to mimick the WebAssembly ccall and cwrap functions. They therefore work the same way.
 
 If you need to pass an array parameter, you need to just add the parameter to the list of parameters.
